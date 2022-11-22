@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     for (String parkH : parkhaus) {
                         Element a = document.getElementById(parkH);
                         assert a != null;
-                        String haus = Objects.requireNonNull(a.select("a").first()).text();
+                        String haus = checkString(Objects.requireNonNull(a.select("a").first()).text());
                         String platz = Objects.requireNonNull(a.select("td").next().first()).text();
                         String frei = Objects.requireNonNull(a.select("td").next().next().first()).text();
                         Log.d("Table", haus + " | " + platz + " | " + frei);
@@ -155,5 +155,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "no internet", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public String checkString(String s) {
+        if (s.contains("/")) return s.substring(s.indexOf("/") + 2);
+        else return s;
     }
 }
