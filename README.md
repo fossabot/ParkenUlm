@@ -33,11 +33,11 @@
 2. Open in Android Studio
 3. Run on emulator or device
 
-## Usage
+### Usage
 
 **coming soon**
 
-## Contributing
+### Contributing
 
 If you want to contribute - open an issue or a pull request.
 
