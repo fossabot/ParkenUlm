@@ -10,11 +10,16 @@
 
 - supports dark mode
 - supports Android N (API level 24) and higher
-- Languages: German, (English)
+- Languages: German, English
 
 ## Screenshots
 
-**coming soon**
+<div>
+<center>
+<img src=".github/graphics/ParkenUlm-dark-Pixel6.png" width="300"  />
+<img style="margin-left: 100px" src=".github/graphics/ParkenUlm-bright-Pixel6.png" width="300"/>
+</center>
+</div>
 
 ### Prerequisites
 
