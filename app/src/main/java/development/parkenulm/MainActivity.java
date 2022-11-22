@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Paper.init(this);
-        ParkhausDB.initTableDB();
+        //ParkhausDB.initTableDB();
         if(Paper.book().contains("ParkhausDB"))
         {
             adapter = new ParkhausListAdapter(Paper.book().read("ParkhausDB"));
@@ -64,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
         //    startActivity(i);
         //});
         Toolbar toolbar = findViewById(R.id.toolbar_main);
+        toolbar.setTitle("Parken in Ulm");
         setSupportActionBar(toolbar);
+
     }
 
 
@@ -96,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.refresh_menu:
                 getData();
                 return true;
-            case R.id.reset_menu:
-                adapter.updateData(ParkhausDB.resetDB());
-                Toast.makeText(this, "Resetted", Toast.LENGTH_SHORT).show();
-                return true;
+            //case R.id.reset_menu:
+            //    adapter.updateData(ParkhausDB.getParkhausDB());
+            //    Toast.makeText(this, "Resetted", Toast.LENGTH_SHORT).show();
+            //    return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -139,11 +141,14 @@ public class MainActivity extends AppCompatActivity {
                         String haus = checkString(Objects.requireNonNull(a.select("a").first()).text());
                         String platz = Objects.requireNonNull(a.select("td").next().first()).text();
                         String frei = Objects.requireNonNull(a.select("td").next().next().first()).text();
-                        Log.d("Table", haus + " | " + platz + " | " + frei);
+                        //Log.d("Table", haus + " | " + platz + " | " + frei);
                         parkhausList.add(new Parkhaus(haus, platz, frei));
                     }
                     Paper.book().write("ParkhausDB", parkhausList);
-                    adapter.updateData(Paper.book().read("ParkhausDB"));
+                    runOnUiThread(() -> {
+                        adapter.updateData(parkhausList);
+                        Toast.makeText(this, "Updated", Toast.LENGTH_SHORT).show();
+                    });
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -151,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
         });
         if (hasInternetConnection(this)) {
             thread.start();
-            Toast.makeText(this, "Updating", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "no internet", Toast.LENGTH_SHORT).show();
         }

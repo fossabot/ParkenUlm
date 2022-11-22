@@ -3,6 +3,9 @@ package development.parkenulm;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +15,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
 
 public class ParkhausListAdapter extends BaseAdapter {
-    private final ArrayList<Parkhaus> ph_data;
+    private ArrayList<Parkhaus> ph_data;
 
     public ParkhausListAdapter(ArrayList<Parkhaus> ph_data) {
         this.ph_data = ph_data;
     }
 
     public void updateData(ArrayList<Parkhaus> newData) {
-        this.ph_data.clear();
-        this.ph_data.addAll(newData);
+        //this.ph_data.clear();
+        //this.ph_data.replaceAll((UnaryOperator<Parkhaus>) newData);
+        //this.ph_data.addAll(newData);
+        ph_data = newData;
         notifyDataSetChanged();
     }
 
@@ -74,7 +80,28 @@ public class ParkhausListAdapter extends BaseAdapter {
         TextView parkhaus_Plaetze = view.findViewById(R.id.ParkhausListItemPlaetze);
         parkhaus_Plaetze.setText(db.getPlatz());
         TextView parkhaus_Frei = view.findViewById(R.id.ParkhausListItemFreiePlaetze);
+        //checkFreePlaces(db.getFrei(), parkhaus_Frei);
+        //Log.d("ParkhausListAdapter", "getView: " + db.getFrei());
         parkhaus_Frei.setText(db.getFrei());
         return view;
     }
+    //public void checkFreePlaces(String checkString, TextView view)
+    //{
+    //    if(checkString.matches("\\d+") && !view.getText().toString().contains("Bahnhof")){
+    //        int places = Integer.parseInt(checkString);
+    //        //Log.d("checkFreePlaces", "places" + places);
+    //        if(places < 20)
+    //        {
+    //            Log.d("checkFreePlaces", "places < 10   "+ places+ view.getText());
+    //            view.setTextColor(Color.RED);
+    //            view.setText(checkString);
+    //        }
+    //        else view.setText(checkString);
+    //    }
+    //    else {
+    //        view.setTextColor(Color.BLUE);
+    //        view.setText(checkString);
+    //        view.setBackgroundColor(Color.YELLOW);
+    //    }
+    //}
 }

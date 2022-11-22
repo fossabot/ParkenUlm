@@ -45,15 +45,14 @@ public class ParkhausDB {
         ParkhausList.add(new Parkhaus("Fischerviertel", "?", "?"));
         ParkhausList.add(new Parkhaus("Salzstadel", "?", "?"));
         ParkhausList.add(new Parkhaus("Frauenstraße", "?", "?"));
-        ParkhausList.add(new Parkhaus("Congress Centrum Nord / Basteicenter", "?", "?"));
-        ParkhausList.add(new Parkhaus("Congress Centrum Süd / Maritim Hotel", "?", "?"));
+        ParkhausList.add(new Parkhaus("Basteicenter", "?", "?"));
+        ParkhausList.add(new Parkhaus("Maritim Hotel", "?", "?"));
         ParkhausList.add(new Parkhaus("Kornhaus", "?", "?"));
         ParkhausList.add(new Parkhaus("Theater", "?", "?"));
         return ParkhausList;
     }
 
     public static ArrayList<Parkhaus> resetDB() {
-        Paper.book().write("TableDB", getParkhausDB());
         return getParkhausDB();
     }
 }

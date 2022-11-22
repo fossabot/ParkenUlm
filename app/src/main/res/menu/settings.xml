@@ -3,12 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/refresh_menu"
-        android:title="Update"
+        android:icon="@drawable/refresh_icon"
         android:visible="true"
-        app:showAsAction="never" />
+        app:showAsAction="ifRoom"
+        android:title="@string/refresh" />
+    <!--
     <item
         android:id="@+id/reset_menu"
-        android:title="Reset"
+        android:title="@string/reset"
+        android:icon="@drawable/reset_icon"
         android:visible="true"
         app:showAsAction="never" />
+        -->
 </menu>

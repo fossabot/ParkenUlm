@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ParkenUlm</string>
+    <string name="refresh">Update</string>
+    <string name="reset">Reset</string>
 </resources>
