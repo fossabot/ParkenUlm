@@ -1,5 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ParkenUlm</string>
     <string name="refresh">Update</string>
-    <string name="reset">Reset</string>
+    <string name="parking_garage">Parking Garage</string>
+    <string name="places">Places</string>
+    <string name="frei">Free</string>
+    <string name="name">Name</string>
 </resources>

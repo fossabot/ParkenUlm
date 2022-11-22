@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ParkenUlm</string>
+    <string name="refresh">Aktualisieren</string>
+    <string name="parking_garage">Parkhaus</string>
+    <string name="places">Plätze</string>
+    <string name="frei">Frei</string>
+    <string name="name">Name</string>
+</resources>
