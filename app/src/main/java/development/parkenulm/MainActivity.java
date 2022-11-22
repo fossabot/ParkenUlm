@@ -1,11 +1,5 @@
 package development.parkenulm;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.Toolbar;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -16,6 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.widget.Toolbar;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -46,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Paper.init(this);
-        if(Paper.book().contains("ParkhausDB"))
-        {
+        if (Paper.book().contains("ParkhausDB")) {
             adapter = new ParkhausListAdapter(Paper.book().read("ParkhausDB"));
-        }
-        else adapter = new ParkhausListAdapter(ParkhausDB.getParkhausDB());
+        } else adapter = new ParkhausListAdapter(ParkhausDB.getParkhausDB());
         ListView listView = findViewById(R.id.ParkhausList);
         listView.setAdapter(adapter);
         getData();
