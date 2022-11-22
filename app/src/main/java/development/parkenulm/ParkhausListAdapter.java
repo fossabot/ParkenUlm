@@ -78,19 +78,23 @@ public class ParkhausListAdapter extends BaseAdapter {
     }
 
     public void Colorize(TextView parkhaus_Frei, TextView parkhaus_Plaetze, TextView parkhaus_Name, String frei, String platz) {
-        if (!frei.contains("k")) {
-            int freiInt = Integer.parseInt(frei);
-            int platzInt = Integer.parseInt(platz);
-            if (freiInt < 30 || freiInt < platzInt * 0.2) {
-                parkhaus_Frei.setTextColor(Color.RED);
+        Thread thread = new Thread(() -> {
+            if (!frei.contains("k")) {
+                int freiInt = Integer.parseInt(frei);
+                int platzInt = Integer.parseInt(platz);
+                if (freiInt < 30) {
+                    parkhaus_Frei.setTextColor(Color.RED);
+                }
+                boolean fifty = freiInt > platzInt / 2;
+                if (freiInt > 30 && !fifty) {
+                    parkhaus_Frei.setTextColor(Color.YELLOW);
+                }
+            } else {
+                parkhaus_Frei.setTextColor(Color.DKGRAY);
+                parkhaus_Plaetze.setTextColor(Color.DKGRAY);
+                parkhaus_Name.setTextColor(Color.DKGRAY);
             }
-            if (freiInt > 30 && freiInt < platzInt / 2) {
-                parkhaus_Frei.setTextColor(Color.YELLOW);
-            }
-        } else {
-            parkhaus_Frei.setTextColor(Color.DKGRAY);
-            parkhaus_Plaetze.setTextColor(Color.DKGRAY);
-            parkhaus_Name.setTextColor(Color.DKGRAY);
-        }
+        });
+        thread.start();
     }
 }
