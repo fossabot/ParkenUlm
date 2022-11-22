@@ -9,14 +9,22 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 
 
 public class ParkhausListAdapter extends BaseAdapter {
-    private final List<Parkhaus> ph_data;
+    private final ArrayList<Parkhaus> ph_data;
 
-    public ParkhausListAdapter(List<Parkhaus> ph_data) {
+    public ParkhausListAdapter(ArrayList<Parkhaus> ph_data) {
         this.ph_data = ph_data;
+    }
+
+    public void updateData(ArrayList<Parkhaus> newData) {
+        this.ph_data.clear();
+        this.ph_data.addAll(newData);
+        notifyDataSetChanged();
     }
 
     /**

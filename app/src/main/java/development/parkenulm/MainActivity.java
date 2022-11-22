@@ -34,6 +34,7 @@ import io.paperdb.Paper;
 public class MainActivity extends AppCompatActivity {
 
     ShareActionProvider shareActionProvider;
+    ParkhausListAdapter adapter;
 
     /**
      * This method is called when the activity is first created.
@@ -48,11 +49,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Paper.init(this);
-        getData();
-        ArrayList<Parkhaus> DB = Paper.book().read("ParkhausDB");
-        ParkhausListAdapter adapter = new ParkhausListAdapter(DB);
+        ParkhausDB.initTableDB();
+        if(Paper.book().contains("ParkhausDB"))
+        {
+            adapter = new ParkhausListAdapter(Paper.book().read("ParkhausDB"));
+        }
+        else adapter = new ParkhausListAdapter(ParkhausDB.getParkhausDB());
         ListView listView = findViewById(R.id.ParkhausList);
-        listView.setAdapter((ListAdapter) adapter);
+        listView.setAdapter(adapter);
+        getData();
         //listView.setOnItemClickListener((parent, view, position, id) -> {
         //    String url = "geo:0,0?q=" + db.getCapital(exchangeRates2[position].getCurrencyName());
         //    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -89,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.refresh_menu:
+                getData();
+                return true;
+            case R.id.reset_menu:
+                adapter.updateData(ParkhausDB.resetDB());
+                Toast.makeText(this, "Resetted", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -133,20 +143,15 @@ public class MainActivity extends AppCompatActivity {
                         parkhausList.add(new Parkhaus(haus, platz, frei));
                     }
                     Paper.book().write("ParkhausDB", parkhausList);
-                    ArrayList<Parkhaus> DB = Paper.book().read("ParkhausDB");
-                    Log.d("Table", "----------------------");
-                    assert DB != null;
-                    for (Parkhaus parkhaus1 : DB) {
-                        Log.d("Table", parkhaus1.getHaus() + " " + parkhaus1.getPlatz() + " " + parkhaus1.getFrei());
-                    }
+                    adapter.updateData(Paper.book().read("ParkhausDB"));
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         });
         if (hasInternetConnection(this)) {
-            Toast.makeText(this, "Updating", Toast.LENGTH_SHORT).show();
             thread.start();
+            Toast.makeText(this, "Updating", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "no internet", Toast.LENGTH_SHORT).show();
         }
