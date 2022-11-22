@@ -6,7 +6,7 @@
 
  A small Android App to see the current usage of the parking garages in Ulm, Germany.  
  The data is provided by the city of Ulm.  
- [Website](https://www.parken-in-ulm.de/)
+ Website with the original data: [Parken in Ulm](https://www.parken-in-ulm.de/)
 
 - supports dark mode
 - supports Android N (API level 24) and higher
