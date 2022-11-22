@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,7 +24,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:fontFamily="sans-serif-black"
-        android:text="Parkhaus"
+        android:text="@string/parking_garage"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +37,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="14dp"
         android:fontFamily="sans-serif-black"
-        android:text="Plätze"
+        android:text="@string/places"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/free"
@@ -51,7 +50,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="sans-serif-black"
-        android:text="Frei"
+        android:text="@string/frei"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,15 +75,4 @@
             tools:context=".MainActivity" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    <!--
-            <ListView
-                android:id="@+id/ParkhausList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@id/parkhaus"
-                app:layout_constraintTop_toBottomOf="@+id/parkhaus"
-                tools:context=".MainActivity" /> -->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

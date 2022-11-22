@@ -3,7 +3,6 @@ package development.parkenulm;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.widget.ShareActionProvider;
 import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -13,10 +12,8 @@ import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +31,6 @@ import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
 
-    ShareActionProvider shareActionProvider;
     ParkhausListAdapter adapter;
 
     /**
@@ -50,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Paper.init(this);
-        //ParkhausDB.initTableDB();
         if(Paper.book().contains("ParkhausDB"))
         {
             adapter = new ParkhausListAdapter(Paper.book().read("ParkhausDB"));
@@ -59,11 +54,6 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.ParkhausList);
         listView.setAdapter(adapter);
         getData();
-        //listView.setOnItemClickListener((parent, view, position, id) -> {
-        //    String url = "geo:0,0?q=" + db.getCapital(exchangeRates2[position].getCurrencyName());
-        //    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        //    startActivity(i);
-        //});
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         toolbar.setTitle("Parken in Ulm");
         setSupportActionBar(toolbar);
@@ -99,17 +89,11 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.refresh_menu:
-                getData();
-                return true;
-            //case R.id.reset_menu:
-            //    adapter.updateData(ParkhausDB.getParkhausDB());
-            //    Toast.makeText(this, "Resetted", Toast.LENGTH_SHORT).show();
-            //    return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.refresh_menu) {
+            getData();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public static boolean hasInternetConnection(final Context context) {
@@ -146,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
                         String haus = checkString(Objects.requireNonNull(a.select("a").first()).text());
                         String platz = Objects.requireNonNull(a.select("td").next().first()).text();
                         String frei = Objects.requireNonNull(a.select("td").next().next().first()).text();
-                        //Log.d("Table", haus + " | " + platz + " | " + frei);
                         parkhausList.add(new Parkhaus(haus, platz, frei));
                     }
                     Paper.book().write("ParkhausDB", parkhausList);

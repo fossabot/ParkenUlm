@@ -2,9 +2,6 @@ package development.parkenulm;
 
 import java.util.ArrayList;
 
-import io.paperdb.Paper;
-
-
 public class ParkhausDB {
     private static final String[] ParkhausTB = {
             "ze11",
@@ -20,13 +17,6 @@ public class ParkhausDB {
     };
 
     private static final ArrayList<Parkhaus> ParkhausList = new ArrayList<>();
-
-
-    public static void initTableDB() {
-        if (!Paper.book().contains("TableDB")) {
-            Paper.book().write("TableDB", ParkhausTB);
-        }
-    }
 
     /**
      * @return the ParkhausTB
@@ -52,7 +42,4 @@ public class ParkhausDB {
         return ParkhausList;
     }
 
-    public static ArrayList<Parkhaus> resetDB() {
-        return getParkhausDB();
-    }
 }

@@ -3,9 +3,7 @@ package development.parkenulm;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.List;
-import java.util.function.UnaryOperator;
 
 
 public class ParkhausListAdapter extends BaseAdapter {
@@ -26,9 +21,6 @@ public class ParkhausListAdapter extends BaseAdapter {
     }
 
     public void updateData(ArrayList<Parkhaus> newData) {
-        //this.ph_data.clear();
-        //this.ph_data.replaceAll((UnaryOperator<Parkhaus>) newData);
-        //this.ph_data.addAll(newData);
         ph_data = newData;
         notifyDataSetChanged();
     }
@@ -80,28 +72,25 @@ public class ParkhausListAdapter extends BaseAdapter {
         TextView parkhaus_Plaetze = view.findViewById(R.id.ParkhausListItemPlaetze);
         parkhaus_Plaetze.setText(db.getPlatz());
         TextView parkhaus_Frei = view.findViewById(R.id.ParkhausListItemFreiePlaetze);
-        //checkFreePlaces(db.getFrei(), parkhaus_Frei);
-        //Log.d("ParkhausListAdapter", "getView: " + db.getFrei());
         parkhaus_Frei.setText(db.getFrei());
+        Colorize(parkhaus_Frei, parkhaus_Plaetze, parkhaus_Name, db.getFrei(), db.getPlatz());
         return view;
     }
-    //public void checkFreePlaces(String checkString, TextView view)
-    //{
-    //    if(checkString.matches("\\d+") && !view.getText().toString().contains("Bahnhof")){
-    //        int places = Integer.parseInt(checkString);
-    //        //Log.d("checkFreePlaces", "places" + places);
-    //        if(places < 20)
-    //        {
-    //            Log.d("checkFreePlaces", "places < 10   "+ places+ view.getText());
-    //            view.setTextColor(Color.RED);
-    //            view.setText(checkString);
-    //        }
-    //        else view.setText(checkString);
-    //    }
-    //    else {
-    //        view.setTextColor(Color.BLUE);
-    //        view.setText(checkString);
-    //        view.setBackgroundColor(Color.YELLOW);
-    //    }
-    //}
+
+    public void Colorize(TextView parkhaus_Frei, TextView parkhaus_Plaetze, TextView parkhaus_Name, String frei, String platz) {
+        if (!frei.contains("k")) {
+            int freiInt = Integer.parseInt(frei);
+            int platzInt = Integer.parseInt(platz);
+            if (freiInt < 30 || freiInt < platzInt * 0.2) {
+                parkhaus_Frei.setTextColor(Color.RED);
+            }
+            if (freiInt > 30 && freiInt < platzInt / 2) {
+                parkhaus_Frei.setTextColor(Color.YELLOW);
+            }
+        } else {
+            parkhaus_Frei.setTextColor(Color.DKGRAY);
+            parkhaus_Plaetze.setTextColor(Color.DKGRAY);
+            parkhaus_Name.setTextColor(Color.DKGRAY);
+        }
+    }
 }
