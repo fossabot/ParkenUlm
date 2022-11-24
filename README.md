@@ -1,4 +1,5 @@
-[![ParkenUlm](https://github.com/bircni/ParkenUlm/actions/workflows/gradle.yml/badge.svg)](https://github.com/bircni/ParkenUlm/actions/workflows/gradle.yml)
+[![ParkenUlm](https://github.com/bircni/ParkenUlm/actions/workflows/gradle.yml/badge.svg)](https://github.com/bircni/ParkenUlm/actions/workflows/gradle.yml) 
+<a><img src="https://img.shields.io/badge/Version-v1.0--beta.1-important"/></a>
 
 # ParkenUlm
 
