@@ -17,17 +17,30 @@
 <div>
 <center>
 <img src=".github/graphics/ParkenUlm-dark-Pixel6.png" width="300"  />
-<img style="margin-left: 100px" src=".github/graphics/ParkenUlm-bright-Pixel6.png" width="300"/>
+<img style="margin-left: 100px" src=".github/graphics/ParkenUlm-details-dark-Pixel6.png" width="300"/>
 </center>
 </div>
 
-### Prerequisites
+</br>
+<center>
+<details>
+<summary>Bright Mode</summary>
+<div>
+
+<img src=".github/graphics/ParkenUlm-bright-Pixel6.png" width="300"  />
+<img style="margin-left: 100px" src=".github/graphics/ParkenUlm-details-bright-Pixel6.png" width="300"/>
+
+</div>
+</details>
+</center>
+
+## Prerequisites
 
 - Android Studio
 - Android SDK
 - Android N (API 24) or higher
 
-### Installation
+## Installation
 
 1. Clone the repo
 
@@ -38,11 +51,7 @@
 2. Open in Android Studio
 3. Run on emulator or device
 
-### Usage
-
-**coming soon**
-
-### Contributing
+## Contributing
 
 If you want to contribute - open an issue or a pull request.
 
