@@ -25,6 +25,7 @@
 <center>
 <details>
 <summary>Bright Mode</summary>
+</br>
 <div>
 
 <img src=".github/graphics/ParkenUlm-bright-Pixel6.png" width="300"  />
