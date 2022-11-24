@@ -3,6 +3,7 @@ package development.parkenulm;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +11,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 
 
 public class ParkhausListAdapter extends BaseAdapter {
     private ArrayList<Parkhaus> ph_data;
+    final AppCompatActivity activity;
 
-    public ParkhausListAdapter(ArrayList<Parkhaus> ph_data) {
+    public ParkhausListAdapter(ArrayList<Parkhaus> ph_data, AppCompatActivity activity) {
         this.ph_data = ph_data;
+        this.activity = activity;
     }
 
     public void updateData(ArrayList<Parkhaus> newData) {
@@ -36,14 +41,14 @@ public class ParkhausListAdapter extends BaseAdapter {
     }
 
     /**
-     * This method returns the item at the given position.
+     * This method returns the Name at the given position.
      *
      * @param i The position of the item.
-     * @return The item at the given position.
+     * @return The Name at the given position.
      */
     @Override
     public Object getItem(int i) {
-        return ph_data.get(i);
+        return ph_data.get(i).getHaus();
     }
 
     /**
@@ -85,14 +90,31 @@ public class ParkhausListAdapter extends BaseAdapter {
                 boolean quater = freiInt < platzInt / 4;
                 parkhaus_Frei.getTag(R.color.black);
                 if (freiInt < 30) {
-                    parkhaus_Frei.setTextColor(Color.RED);
+                    activity.runOnUiThread(() -> parkhaus_Frei.setTextColor(Color.RED));
                 } else if (freiInt > 30 && quater) {
-                    parkhaus_Frei.setTextColor(Color.YELLOW);
+                    activity.runOnUiThread(() -> parkhaus_Frei.setTextColor(Color.rgb(255, 136, 0)));
                 }
             } else {
-                parkhaus_Frei.setTextColor(Color.DKGRAY);
-                parkhaus_Plaetze.setTextColor(Color.DKGRAY);
-                parkhaus_Name.setTextColor(Color.DKGRAY);
+                activity.runOnUiThread(() -> {
+                    int nightModeFlags =
+                            activity.getResources().getConfiguration().uiMode &
+                                    Configuration.UI_MODE_NIGHT_MASK;
+                    switch (nightModeFlags) {
+                        case Configuration.UI_MODE_NIGHT_YES:
+                            parkhaus_Frei.setTextColor(Color.DKGRAY);
+                            parkhaus_Plaetze.setTextColor(Color.DKGRAY);
+                            parkhaus_Name.setTextColor(Color.DKGRAY);
+                            break;
+                        case Configuration.UI_MODE_NIGHT_NO:
+                            parkhaus_Frei.setTextColor(Color.LTGRAY);
+                            parkhaus_Plaetze.setTextColor(Color.LTGRAY);
+                            parkhaus_Name.setTextColor(Color.LTGRAY);
+                            break;
+                        case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                            break;
+                    }
+
+                });
             }
         });
         thread.start();

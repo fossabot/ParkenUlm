@@ -2,6 +2,7 @@ package development.parkenulm;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
@@ -47,13 +48,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Paper.init(this);
         if (Paper.book().contains("ParkhausDB")) {
-            adapter = new ParkhausListAdapter(Paper.book().read("ParkhausDB"));
-        } else adapter = new ParkhausListAdapter(ParkhausDB.getParkhausDB());
+            adapter = new ParkhausListAdapter(Paper.book().read("ParkhausDB"), this);
+        } else adapter = new ParkhausListAdapter(ParkhausDB.getParkhausDB(), this);
         ListView listView = findViewById(R.id.ParkhausList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent intent = new Intent(this, DetailsActivity.class);
+            intent.putExtra("ParkhausName", adapter.getItem(position).toString());
+            startActivity(intent);
+        });
         getData();
         Toolbar toolbar = findViewById(R.id.toolbar_main);
-        toolbar.setTitle("Parken in Ulm");
+        toolbar.setTitle(getString(R.string.toolbar_title));
         setSupportActionBar(toolbar);
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipeToRefresh);
         swipeRefreshLayout.setOnRefreshListener(() -> {
@@ -127,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
                         String haus = checkString(Objects.requireNonNull(a.select("a").first()).text());
                         String platz = Objects.requireNonNull(a.select("td").next().first()).text();
                         String frei = Objects.requireNonNull(a.select("td").next().next().first()).text();
-                        parkhausList.add(new Parkhaus(haus, platz, frei));
+                        String open = Objects.requireNonNull(a.select("td").next().next().next().first()).text();
+                        parkhausList.add(new Parkhaus(haus, platz, frei, open));
                     }
                     Paper.book().write("ParkhausDB", parkhausList);
                     runOnUiThread(() -> {
