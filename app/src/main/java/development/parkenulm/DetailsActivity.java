@@ -1,14 +1,10 @@
 package development.parkenulm;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -27,18 +23,18 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         parkhausName = getIntent().getStringExtra("ParkhausName");
-        Button button = findViewById(R.id.maps_button);
-        button.setOnClickListener(v -> {
-            String search = getString(R.string.parking_garage) + " " + parkhausName + " " + getString(R.string.ulm);
-            String url = "geo:0,0?q=" + search;
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            intent.setPackage("com.google.android.apps.maps");
-            if (intent.resolveActivity(getPackageManager()) != null) {
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, getString(R.string.no_maps_app), Toast.LENGTH_SHORT).show();
-            }
-        });
+        //Button button = findViewById(R.id.maps_button);
+        //button.setOnClickListener(v -> {
+        //    String search = getString(R.string.parking_garage) + " " + parkhausName + " " + getString(R.string.ulm);
+        //    String url = "geo:0,0?q=" + search;
+        //    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        //    intent.setPackage("com.google.android.apps.maps");
+        //    if (intent.resolveActivity(getPackageManager()) != null) {
+        //        startActivity(intent);
+        //    } else {
+        //        Toast.makeText(this, getString(R.string.no_maps_app), Toast.LENGTH_SHORT).show();
+        //    }
+        //});
         TextView openTimes = findViewById(R.id.openTV);
         openTimes.setText(getOpenTimes());
         Toolbar toolbar_list = findViewById(R.id.toolbar_details);
@@ -48,9 +44,8 @@ public class DetailsActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-        ImageView map = findViewById(R.id.mapView);
+        ImageView map = findViewById(R.id.map);
         map.setImageResource(getPath());
-        getFreePlaces();
     }
 
     private void getFreePlaces() {
@@ -85,7 +80,7 @@ public class DetailsActivity extends AppCompatActivity {
     private String openTimesTranslator(String input) {
         if (!Locale.getDefault().getLanguage().equals("de") && input.contains("täglich durchgehend")) {
             return getString(R.string.open_24h);
-        } else return input;
+        } else return input.replace(",", "\n");
     }
 
     /**
