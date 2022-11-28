@@ -24,10 +24,6 @@
         <item name="android:textColorSecondary">@color/white</item>
     </style>
 
-    <style name="Theme.ParkenUlm.Button" parent="Theme.ParkenUlm">
-        <item name="android:textColor">@color/white</item>
-    </style>
-
     <style name="Theme.ParkenUlm.CircularProgressIndicator" parent="Widget.MaterialComponents.ProgressIndicator">
         <item name="indicatorDirectionCircular">counterclockwise</item>
     </style>
