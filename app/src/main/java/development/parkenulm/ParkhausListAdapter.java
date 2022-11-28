@@ -162,9 +162,11 @@ public class ParkhausListAdapter extends BaseAdapter {
                     switch (nightModeFlags) {
                         case Configuration.UI_MODE_NIGHT_YES:
                             progressBar.setTrackColor(Color.DKGRAY);
+                            progressText.setTextColor(Color.DKGRAY);
                             break;
                         case Configuration.UI_MODE_NIGHT_NO:
                             progressBar.setTrackColor(Color.LTGRAY);
+                            progressText.setTextColor(Color.LTGRAY);
                             break;
                         case Configuration.UI_MODE_NIGHT_UNDEFINED:
                             break;
