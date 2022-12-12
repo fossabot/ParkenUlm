@@ -1,4 +1,5 @@
 [![ParkenUlm](https://github.com/bircni/ParkenUlm/actions/workflows/gradle.yml/badge.svg)](https://github.com/bircni/ParkenUlm/actions/workflows/gradle.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbircni%2FParkenUlm.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbircni%2FParkenUlm?ref=badge_shield)
 <a><img src="https://img.shields.io/badge/Version-v1.0--beta.1-important"/></a>
 
 # ParkenUlm
@@ -63,3 +64,7 @@ If you want to contribute - open an issue or a pull request.
 
 - [Parken in Ulm](https://www.parken-in-ulm.de/) for the data
 - [@dj82atwork](https://github.com/dj82atwork) for the icon and testing
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fbircni%2FParkenUlm.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fbircni%2FParkenUlm?ref=badge_large)
